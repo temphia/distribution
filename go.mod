@@ -2,7 +2,10 @@ module github.com/temphia/distribution
 
 go 1.20
 
-require github.com/temphia/temphia v0.0.0-20230505011158-585464fe2b8e
+require (
+	github.com/temphia/temphia v0.0.0-20230505011158-585464fe2b8e
+	github.com/temphia/wasmer_executor v0.0.0-20230505195452-da384f326cc7
+)
 
 require (
 	github.com/Masterminds/goutils v1.1.1 // indirect
@@ -80,6 +83,7 @@ require (
 	github.com/tidwall/tinyqueue v0.1.1 // indirect
 	github.com/ugorji/go/codec v1.2.7 // indirect
 	github.com/upper/db/v4 v4.5.4 // indirect
+	github.com/wasmerio/wasmer-go v1.0.4 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	github.com/yuin/goldmark v1.5.3 // indirect
 	github.com/ztrue/tracerr v0.3.0 // indirect
