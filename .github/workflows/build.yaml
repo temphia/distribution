@@ -1,0 +1,87 @@
+on: [workflow_dispatch]
+
+# act workflow_dispatch -W .github/workflows/build.yml
+
+
+permissions:
+  contents: write
+
+jobs:
+  normal_build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+
+      - name: run releaser
+        run: make snapshot      
+
+      #artifacts
+      - name: save temphia_windows_amd64
+        uses: actions/upload-artifact@v3
+        with:
+          name: temphia_windows_amd64
+          path: dist/temphia-windows_windows_amd64_v1/
+      - name: save temphia_linux_amd64
+        uses: actions/upload-artifact@v3
+        with:
+          name: temphia_linux_amd64
+          path: dist/temphia-linux_linux_amd64_v1/
+      - name: save temphia_linux_arm64
+        uses: actions/upload-artifact@v3
+        with:
+          name: temphia_linux_arm64
+          path: dist/temphia-linux-arm64_linux_arm64/
+      - name: save temphia_darwin_amd64
+        uses: actions/upload-artifact@v3
+        with:
+          name: temphia_darwin_amd64
+          path: dist/temphia-darwin-amd64_darwin_amd64_v1/
+      - name: save temphia_darwin_arm64
+        uses: actions/upload-artifact@v3
+        with:
+          name: temphia_darwin_arm64
+          path: dist/temphia-darwin-arm64_darwin_arm64/
+  
+  android_build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
+
+      - name: Install GCC
+        run: sudo apt install -y gcc g++
+
+      - uses: nttld/setup-ndk@v1
+        id: setup-ndk
+        with:
+          ndk-version: r25c
+          add-to-path: false
+          local-cache: true
+
+      - name: LS
+        env:
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+        run: |
+          ls -lah $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/
+
+      - name: Build for Android ARM64
+        env:
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+        run: |
+          export CGO_ENABLED=1
+          export GOOS=android
+          export GOARCH=arm64
+          export CC=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang
+          go build -o dist/temphia_android_arm64/temphia .
+
+      #artifacts
+      - name: save temphia_android_arm64
+        uses: actions/upload-artifact@v3
+        with:
+          name: temphia_android_arm64
+          path: dist/temphia_android_arm64
