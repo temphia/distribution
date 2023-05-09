@@ -3,7 +3,7 @@ module github.com/temphia/distribution
 go 1.20
 
 require (
-	github.com/temphia/temphia v0.0.0-20230505011158-585464fe2b8e
+	github.com/temphia/temphia v0.0.0-20230508234550-b35507382ee4
 	github.com/temphia/wasmer_executor v0.0.0-20230505195452-da384f326cc7
 )
 
@@ -59,7 +59,7 @@ require (
 	github.com/mattn/go-isatty v0.0.16 // indirect
 	github.com/mattn/go-sqlite3 v1.14.16 // indirect
 	github.com/mitchellh/copystructure v1.0.0 // indirect
-	github.com/mitchellh/mapstructure v1.4.1 // indirect
+	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
@@ -81,6 +81,7 @@ require (
 	github.com/tidwall/pretty v1.2.1 // indirect
 	github.com/tidwall/rtred v0.1.2 // indirect
 	github.com/tidwall/tinyqueue v0.1.1 // indirect
+	github.com/twpayne/go-geom v1.5.2 // indirect
 	github.com/ugorji/go/codec v1.2.7 // indirect
 	github.com/upper/db/v4 v4.5.4 // indirect
 	github.com/wasmerio/wasmer-go v1.0.4 // indirect
